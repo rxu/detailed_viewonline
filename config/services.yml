@@ -1,0 +1,11 @@
+services:
+    rxu.detailed_viewonline.listener:
+        class: rxu\detailed_viewonline\event\listener
+        arguments:
+            - @dbal.conn
+            - @user
+            - @auth
+            - %core.root_path%
+            - %core.php_ext%
+        tags:
+            - { name: event.listener }

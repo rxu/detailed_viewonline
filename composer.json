@@ -1,0 +1,23 @@
+{
+    "name": "rxu/detailed_viewonline",
+    "type": "phpbb-extension",
+    "description": "Provide more detailed information about a place on the board on viewonline page.",
+    "homepage": "http://www.phpbbguru.net",
+    "version": "1.0.0",
+    "time": "2014-02-17",
+    "licence": "GPL-2.0",
+    "authors": [
+        {
+            "name": "rxu",
+            "homepage": "http://www.phpbbguru.net",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "phpbb/phpbb": "3.1.*@dev"
+    },
+    "extra": {
+        "display-name": "Detailed viewonline"
+    }
+}
