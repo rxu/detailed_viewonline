@@ -68,7 +68,8 @@ class listener implements EventSubscriberInterface
 							POSTS_TABLE		=> 'p',
 							TOPICS_TABLE	=> 't',
 						),
-						'WHERE'		=> 't.topic_id = p.topic_id',
+						'WHERE'		=> 't.topic_id = p.topic_id
+							AND p.post_id = ' . $post_id,
 					);
 				}
 				else
@@ -85,7 +86,7 @@ class listener implements EventSubscriberInterface
 				$result = $this->db->sql_query($this->db->sql_build_query('SELECT', $sql_ary));
 				if ($topicdata = $this->db->sql_fetchrow($result))
 				{
-					$forum_id = (int) $topicdata['forum_id'];
+					$forum_id = ((int) $row['session_forum_id']) ? : (int) $topicdata['forum_id'];
 					if ($forum_id && $this->auth->acl_get('f_list', $forum_id))
 					{
 						$topic_title = $topicdata['topic_title'];
@@ -98,9 +99,9 @@ class listener implements EventSubscriberInterface
 
 			case 'search';
 				preg_match('#search_id=([a-z_]+)#i', $row['session_page'], $search_id); 
- 		           $search_id = (!empty($search_id[1])) ? $search_id[1] : '';
- 		           $search_mode = array('egosearch' => 'SEARCH_SELF', 'unanswered' => 'SEARCH_UNANSWERED', 'unreadposts' => 'SEARCH_UNREAD', 'newposts' => 'SEARCH_NEW', 'active_topics' => 'SEARCH_ACTIVE_TOPICS');
- 		           $location = $this->user->lang['SEARCHING_FORUMS'] . (($search_id) ? ': <strong>' . $this->user->lang[$search_mode[$search_id]] . '</strong>' : '');
+				$search_id = (!empty($search_id[1])) ? $search_id[1] : '';
+				$search_mode = array('egosearch' => 'SEARCH_SELF', 'unanswered' => 'SEARCH_UNANSWERED', 'unreadposts' => 'SEARCH_UNREAD', 'newposts' => 'SEARCH_NEW', 'active_topics' => 'SEARCH_ACTIVE_TOPICS');
+				$location = $this->user->lang['SEARCHING_FORUMS'] . (($search_id) ? ': <strong>' . $this->user->lang[$search_mode[$search_id]] . '</strong>' : '');
 			break;
 
 			case 'memberlist';
