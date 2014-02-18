@@ -131,8 +131,8 @@ class listener implements EventSubscriberInterface
 					$sql = 'SELECT real_filename, post_msg_id FROM ' . ATTACHMENTS_TABLE . '
 						WHERE attach_id = ' . $file_id;
 
-					$result = $this->db_sql_query($sql);
-					if ($filedata = $this->db_sql_fetchrow($result))
+					$result = $this->db->sql_query($sql);
+					if ($filedata = $this->db->sql_fetchrow($result))
 					{
 						$location = $this->user->lang['DOWNLOADING_FILE'] . ' <strong>' . $filedata['real_filename'] . '</strong>';
 						$location_url = append_sid("{$this->phpbb_root_path}viewtopic.$this->php_ext", "p={$filedata['post_msg_id']}#p{$filedata['post_msg_id']}");
