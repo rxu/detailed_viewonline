@@ -36,5 +36,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'READING_THE_TOPIC'			=> 'Reading the topic <strong>%1$s</strong> in %2$s',
+	'READING_THE_TOPIC_PAGE'	=> 'Reading page %3$s of the topic <strong>%1$s</strong> in %2$s',
+	'READING_THE_NEW_POSTS'		=> 'Reading new posts of the topic <strong>%1$s</strong> in %2$s',
 	'READING_THE_POST'			=> 'Reading the post in the topic <strong>%1$s</strong> in %2$s',
 ));

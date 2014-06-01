@@ -2,6 +2,7 @@ services:
     rxu.detailed_viewonline.listener:
         class: rxu\detailed_viewonline\event\listener
         arguments:
+            - @config
             - @dbal.conn
             - @user
             - @auth

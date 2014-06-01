@@ -24,8 +24,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
-	public function __construct(\phpbb\db\driver\driver $db, \phpbb\user $user, \phpbb\auth\auth $auth, $phpbb_root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\user $user, \phpbb\auth\auth $auth, $phpbb_root_path, $php_ext)
 	{
+		$this->config = $config;
 		$this->user = $user;
 		$this->db = $db;
 		$this->auth = $auth;
@@ -54,16 +55,22 @@ class listener implements EventSubscriberInterface
 		{
 			case 'viewtopic':
 
-				preg_match('#t=([0-9]+)#i', $row['session_page'], $topic_id);
+				preg_match('#[\?&]t=([0-9]+)#i', $row['session_page'], $topic_id);
 				$topic_id = (sizeof($topic_id)) ? (int) $topic_id[1] : 0;
 
-				preg_match('#p=([0-9]+)#i', $row['session_page'], $post_id); 
+				preg_match('#[\?&]p=([0-9]+)#i', $row['session_page'], $post_id); 
 				$post_id = (sizeof($post_id)) ? (int) $post_id[1] : 0;
+
+				preg_match('#[\?&]start=([0-9]+)#i', $row['session_page'], $start);
+				$start = (sizeof($start)) ? (int) $start[1] : 0;
+				$page = ($start) ? ($start / $this->config['posts_per_page']) + 1 : 0;
+
+				$view = (preg_match('#[\?&]view=unread#i', $row['session_page'])) ? true : false;
 
 				if ($post_id)
 				{
 					$sql_ary = array(
-						'SELECT'	=> 't.topic_title, t.forum_id',
+						'SELECT'	=> 't.topic_id, t.topic_title, t.forum_id',
 						'FROM'		=> array(
 							POSTS_TABLE		=> 'p',
 							TOPICS_TABLE	=> 't',
@@ -86,27 +93,47 @@ class listener implements EventSubscriberInterface
 				$result = $this->db->sql_query($this->db->sql_build_query('SELECT', $sql_ary));
 				if ($topicdata = $this->db->sql_fetchrow($result))
 				{
-					$forum_id = ((int) $row['session_forum_id']) ? : (int) $topicdata['forum_id'];
+					$topic_id = ($topic_id) ? : (int) $topicdata['topic_id'];
+					$forum_id = (int) $topicdata['forum_id'];
 					if ($forum_id && $this->auth->acl_get('f_list', $forum_id))
 					{
 						$topic_title = $topicdata['topic_title'];
-						$location = ($post_id) ? sprintf($this->user->lang['READING_THE_POST'], $topic_title, $forum_data[$forum_id]['forum_name']) : sprintf($this->user->lang['READING_THE_TOPIC'], $topic_title, $forum_data[$forum_id]['forum_name']);
-						$location_url = ($post_id) ? append_sid("{$this->phpbb_root_path}viewtopic.$this->php_ext", "p=$post_id#p$post_id") : append_sid("{$this->phpbb_root_path}viewtopic.$this->php_ext", 'f=' . $forum_id . '&amp;t=' . $topic_id);
+						if ($post_id)
+						{
+							$location = sprintf($this->user->lang['READING_THE_POST'], $topic_title, $forum_data[$forum_id]['forum_name']);
+							$location_url = append_sid("{$this->phpbb_root_path}viewtopic.$this->php_ext", "p=$post_id#p$post_id");
+						}
+						else if ($start)
+						{
+							$location = sprintf($this->user->lang['READING_THE_TOPIC_PAGE'], $topic_title, $forum_data[$forum_id]['forum_name'], $page);
+							$location_url = append_sid("{$this->phpbb_root_path}viewtopic.$this->php_ext", 'f=' . $forum_id . '&amp;t=' . $topic_id . '&amp;start=' . $start);
+						}
+						else if ($view)
+						{
+							$location = sprintf($this->user->lang['READING_THE_NEW_POSTS'], $topic_title, $forum_data[$forum_id]['forum_name']);
+							$location_url = append_sid("{$this->phpbb_root_path}viewtopic.$this->php_ext", 'f=' . $forum_id . '&amp;t=' . $topic_id . '&amp;view=unread#unread');
+						}
+						else
+						{
+							$location = sprintf($this->user->lang['READING_THE_TOPIC'], $topic_title, $forum_data[$forum_id]['forum_name']);
+							$location_url = append_sid("{$this->phpbb_root_path}viewtopic.$this->php_ext", 'f=' . $forum_id . '&amp;t=' . $topic_id);
+						}
 					}
 				}
 				$this->db->sql_freeresult($result);
 			break;
 
 			case 'search';
-				preg_match('#search_id=([a-z_]+)#i', $row['session_page'], $search_id); 
+				preg_match('#search_id=([a-z_]+)#i', $row['session_page'], $search_id);
 				$search_id = (!empty($search_id[1])) ? $search_id[1] : '';
 				$search_mode = array('egosearch' => 'SEARCH_SELF', 'unanswered' => 'SEARCH_UNANSWERED', 'unreadposts' => 'SEARCH_UNREAD', 'newposts' => 'SEARCH_NEW', 'active_topics' => 'SEARCH_ACTIVE_TOPICS');
 				$location = $this->user->lang['SEARCHING_FORUMS'] . (($search_id) ? ': <strong>' . $this->user->lang[$search_mode[$search_id]] . '</strong>' : '');
+				$location_url = append_sid("{$this->phpbb_root_path}search.$this->php_ext", ($search_id) ? 'search_id=' . $search_id : '');
 			break;
 
 			case 'memberlist';
-				preg_match('#u=([0-9]+)#i', $row['session_page'], $user_id); 
-				$user_id = (sizeof($user_id)) ? (int) $user_id[1] : 0; 
+				preg_match('#[\?&]u=([0-9]+)#i', $row['session_page'], $user_id);
+				$user_id = (sizeof($user_id)) ? (int) $user_id[1] : 0;
 				if ($user_id)
 				{
 					$sql = 'SELECT username, user_colour FROM ' . USERS_TABLE . '
@@ -124,7 +151,7 @@ class listener implements EventSubscriberInterface
 			break;
 
 			case 'download/file':
-				preg_match('#id=([0-9]+)#i', $row['session_page'], $file_id); 
+				preg_match('#[\?&]id=([0-9]+)#i', $row['session_page'], $file_id);
 				$file_id = (sizeof($file_id)) ? (int) $file_id[1] : 0;
 				if ($file_id)
 				{
