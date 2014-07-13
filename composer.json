@@ -14,10 +14,12 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "phpbb/phpbb": "3.1.*@dev"
+        "php": ">=5.3.3"
     },
     "extra": {
-        "display-name": "Detailed viewonline"
+        "display-name": "Detailed viewonline",
+        "soft-require": {
+           "phpbb/phpbb": "3.1.*@dev"
+        }
     }
 }
