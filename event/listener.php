@@ -1,13 +1,13 @@
 <?php
 /**
  *
- * @package detailed_viewonline
+ * @package DetailedViewonline
  * @copyright (c) 2014 Ruslan Uzdenov (rxu)
  * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  *
  */
 
-namespace rxu\detailed_viewonline\event;
+namespace rxu\DetailedViewonline\event;
 
 /**
 * @ignore
@@ -43,7 +43,7 @@ class listener implements EventSubscriberInterface
 
 	public function detailed_viewonline($event)
 	{
-		$this->user->add_lang_ext('rxu/detailed_viewonline', 'detailed_viewonline');
+		$this->user->add_lang_ext('rxu/DetailedViewonline', 'detailed_viewonline');
 
 		$forum_data = $event['forum_data'];
 		$on_page = $event['on_page'];

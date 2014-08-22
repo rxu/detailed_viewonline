@@ -1,5 +1,5 @@
 {
-    "name": "rxu/detailed_viewonline",
+    "name": "rxu/DetailedViewonline",
     "type": "phpbb-extension",
     "description": "Provide more detailed information about a place on the board on viewonline page.",
     "homepage": "http://www.phpbbguru.net",
@@ -16,6 +16,9 @@
     "require": {
         "php": ">=5.3.3"
     },
+   "require-dev": {
+      "phpbb/epv": "dev-master"
+   },
     "extra": {
         "display-name": "Detailed viewonline",
         "soft-require": {

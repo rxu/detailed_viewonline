@@ -1,13 +1,13 @@
 <?php
 /**
 *
-* @package detailed_viewonline
+* @package DetailedViewonline
 * @copyright (c) 2014 rxu
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-namespace rxu\detailed_viewonline\migrations;
+namespace rxu\DetailedViewonline\migrations;
 
 class v_1_0_0 extends \phpbb\db\migration\migration
 {
