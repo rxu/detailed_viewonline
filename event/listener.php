@@ -10,14 +10,6 @@
 namespace rxu\DetailedViewonline\event;
 
 /**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
-/**
 * Event listener
 */
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -58,7 +50,7 @@ class listener implements EventSubscriberInterface
 				preg_match('#[\?&]t=([0-9]+)#i', $row['session_page'], $topic_id);
 				$topic_id = (sizeof($topic_id)) ? (int) $topic_id[1] : 0;
 
-				preg_match('#[\?&]p=([0-9]+)#i', $row['session_page'], $post_id); 
+				preg_match('#[\?&]p=([0-9]+)#i', $row['session_page'], $post_id);
 				$post_id = (sizeof($post_id)) ? (int) $post_id[1] : 0;
 
 				preg_match('#[\?&]start=([0-9]+)#i', $row['session_page'], $start);
