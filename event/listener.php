@@ -1,11 +1,12 @@
 <?php
 /**
- *
- * @package DetailedViewonline
- * @copyright (c) 2014 Ruslan Uzdenov (rxu)
- * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
- *
- */
+*
+* Detailed Viewonline extension for the phpBB Forum Software package.
+*
+* @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
+*/
 
 namespace rxu\DetailedViewonline\event;
 
@@ -16,6 +17,36 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\db\driver\driver_interface */
+	protected $db;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/** @var \phpbb\auth\auth */
+	protected $auth;
+
+	/** @var string phpbb_root_path */
+	protected $phpbb_root_path;
+
+	/** @var string phpEx */
+	protected $php_ext;
+
+	/**
+	* Constructor
+	*
+	* @param \phpbb\config\config                 $config           Config object
+	* @param \phpbb\db\driver\driver_interface    $db               DBAL object
+	* @param \phpbb\user                          $user             User object
+	* @param \phpbb\auth\auth                     $auth             User object
+	* @param string                               $phpbb_root_path  phpbb_root_path
+	* @param string                               $php_ext          phpEx
+	* @return \rxu\DetailedViewonline\event\listener
+	* @access public
+	*/
 	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, \phpbb\auth\auth $auth, $phpbb_root_path, $php_ext)
 	{
 		$this->config = $config;
