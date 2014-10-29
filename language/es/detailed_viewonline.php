@@ -1,11 +1,10 @@
 <?php
-/** 
+/**
 *
-* detailed_viewonline [Spanish]
+* Detailed Viewonline extension for the phpBB Forum Software package.
 *
-* @package detailed_viewonline
-* @copyright (c) 2014 Ruslan Uzdenov (rxu)
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 
