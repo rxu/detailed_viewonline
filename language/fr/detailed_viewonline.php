@@ -36,8 +36,8 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'READING_THE_TOPIC'			=> 'Lit le sujet <strong>%1$s</strong> dans %2$s',
-	'READING_THE_TOPIC_PAGE'	=> 'Lit la page %3$s du sujet <strong>%1$s</strong> dans %2$s',
-	'READING_THE_NEW_POSTS'		=> 'Lit les nouveaux messages du sujet <strong>%1$s</strong> dans %2$s',
-	'READING_THE_POST'			=> 'Lit le message du sujet <strong>%1$s</strong> dans %2$s',
+	'READING_THE_TOPIC'			=> 'Consulte le sujet <strong>%1$s</strong> dans le forum <strong>%2$s</strong>',
+	'READING_THE_TOPIC_PAGE'	=> 'Consulte la page <strong>%3$s</strong> du sujet <strong>%1$s</strong> dans le forum <strong>%2$s</strong>',
+	'READING_THE_NEW_POSTS'		=> 'Consulte les nouveaux messages du sujet <strong>%1$s</strong> dans le forum <strong>%2$s</strong>',
+	'READING_THE_POST'			=> 'Consulte le message du sujet <strong>%1$s</strong> dans le forum <strong>%2$s</strong>',
 ));
