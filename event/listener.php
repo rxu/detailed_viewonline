@@ -86,7 +86,7 @@ class listener implements EventSubscriberInterface
 
 				preg_match('#[\?&]start=([0-9]+)#i', $row['session_page'], $start);
 				$start = (sizeof($start)) ? (int) $start[1] : 0;
-				$page = ($start) ? ($start / $this->config['posts_per_page']) + 1 : 0;
+				$page = ($start) ? (floor($start / $this->config['posts_per_page']) + 1) : 0;
 
 				$view = (preg_match('#[\?&]view=unread#i', $row['session_page'])) ? true : false;
 
