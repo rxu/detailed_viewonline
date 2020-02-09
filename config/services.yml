@@ -1,6 +1,6 @@
 services:
-    rxu.DetailedViewonline.listener:
-        class: rxu\DetailedViewonline\event\listener
+    rxu.detailedviewonline.listener:
+        class: rxu\detailedviewonline\event\listener
         arguments:
             - '@config'
             - '@dbal.conn'

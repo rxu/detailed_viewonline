@@ -8,7 +8,7 @@
 *
 */
 
-namespace rxu\DetailedViewonline\event;
+namespace rxu\detailedviewonline\event;
 
 /**
 * Event listener
@@ -44,7 +44,7 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\auth\auth                     $auth             User object
 	* @param string                               $phpbb_root_path  phpbb_root_path
 	* @param string                               $php_ext          phpEx
-	* @return \rxu\DetailedViewonline\event\listener
+	* @return \rxu\detailedviewonline\event\listener
 	* @access public
 	*/
 	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, \phpbb\auth\auth $auth, $phpbb_root_path, $php_ext)
@@ -66,7 +66,7 @@ class listener implements EventSubscriberInterface
 
 	public function detailed_viewonline($event)
 	{
-		$this->user->add_lang_ext('rxu/DetailedViewonline', 'detailed_viewonline');
+		$this->user->add_lang_ext('rxu/detailedviewonline', 'detailed_viewonline');
 
 		$forum_data = $event['forum_data'];
 		$on_page = $event['on_page'];

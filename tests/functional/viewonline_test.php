@@ -8,7 +8,7 @@
 *
 */
 
-namespace rxu\DetailedViewonline\tests\functional;
+namespace rxu\detailedviewonline\tests\functional;
 
 /**
  * @group functional
@@ -17,7 +17,7 @@ class viewonline_test extends \phpbb_functional_test_case
 {
 	static protected function setup_extensions()
 	{
-		return array('rxu/DetailedViewonline');
+		return array('rxu/detailedviewonline');
 	}
 
 	public function test_viewonline_page()
