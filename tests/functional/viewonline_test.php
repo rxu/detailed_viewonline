@@ -1,12 +1,14 @@
 <?php
 /**
-*
-* Detailed Viewonline extension for the phpBB Forum Software package.
-*
-* @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
-* @license GNU General Public License, version 2 (GPL-2.0)
-*
-*/
+ *
+ * Detailed Viewonline.
+ * Provide more detailed information about a place on the board on viewonline page.
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2013-2025, rxu, https://www.phpbbguru.net
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
 
 namespace rxu\detailedviewonline\tests\functional;
 
@@ -17,7 +19,7 @@ class viewonline_test extends \phpbb_functional_test_case
 {
 	static protected function setup_extensions()
 	{
-		return array('rxu/detailedviewonline');
+		return ['rxu/detailedviewonline'];
 	}
 
 	public function test_viewonline_page()

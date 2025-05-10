@@ -2,10 +2,10 @@ services:
     rxu.detailedviewonline.listener:
         class: rxu\detailedviewonline\event\listener
         arguments:
+            - '@auth'
             - '@config'
             - '@dbal.conn'
-            - '@user'
-            - '@auth'
+            - '@language'
             - '%core.root_path%'
             - '%core.php_ext%'
         tags:

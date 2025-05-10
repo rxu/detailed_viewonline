@@ -3,8 +3,8 @@
     "type": "phpbb-extension",
     "description": "Provide more detailed information about a place on the board on viewonline page.",
     "homepage": "http://www.phpbbguru.net",
-    "version": "1.0.0",
-    "time": "2014-02-17",
+    "version": "1.0.1",
+    "time": "2025-05-11",
     "license": "GPL-2.0",
     "authors": [
         {
@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": "^7.2 || ^8.0.0"
     },
    "require-dev": {
       "phpbb/epv": "dev-master"
@@ -22,7 +22,7 @@
     "extra": {
         "display-name": "Detailed viewonline",
         "soft-require": {
-           "phpbb/phpbb": "3.1.*@dev"
+           "phpbb/phpbb": ">=3.3.0, <4.0.0@dev"
         }
     }
 }
