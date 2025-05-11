@@ -1,18 +1,18 @@
 <?php
 /**
-*
-* Detailed Viewonline extension for the phpBB Forum Software package.
-*
-* @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
-* @license GNU General Public License, version 2 (GPL-2.0)
-*
-* French translation by Galixte (http://www.galixte.com)
-*
-*/
+ *
+ * Detailed Viewonline.
+ * Provide more detailed information about a place on the board on viewonline page.
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2013-2025, rxu, https://www.phpbbguru.net
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
 
 /**
-* @ignore
-*/
+ * @ignore
+ */
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -35,9 +35,9 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'READING_THE_TOPIC'			=> 'Consulte le sujet <strong>%1$s</strong> dans le forum <strong>%2$s</strong>',
 	'READING_THE_TOPIC_PAGE'	=> 'Consulte la page <strong>%3$s</strong> du sujet <strong>%1$s</strong> dans le forum <strong>%2$s</strong>',
 	'READING_THE_NEW_POSTS'		=> 'Consulte les nouveaux messages du sujet <strong>%1$s</strong> dans le forum <strong>%2$s</strong>',
 	'READING_THE_POST'			=> 'Consulte le message du sujet <strong>%1$s</strong> dans le forum <strong>%2$s</strong>',
-));
+]);
